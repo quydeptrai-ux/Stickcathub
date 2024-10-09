@@ -21,7 +21,7 @@ end
 fask.wait = myWait
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
-local Window = Luxury:CreateWindow({
+local Window = Fluent:CreateWindow({
     Title = "Luxury Hub | Premium",
     SubTitle = "by xZc",
     TabWidth = 160,
