@@ -19,77 +19,6 @@ local myWait = function(n)
     end
 end
 fask.wait = myWait
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-
-local Window = Fluent:CreateWindow({
-    Title = "Luxury Hub | Premium",
-    SubTitle = "by xZc",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Light",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
-})
-
-local Tabs = {
-    Main = Window:AddTab({
-        Title = "Main",
-        Icon = ""
-    }),
-    Stats = Window:AddTab({
-        Title = "Stats",
-        Icon = ""
-    }),
-
-    FindFirst = Window:AddTab({
-        Title = "First Sea",
-        Icon = ""
-    }),
-    FindSec = Window:AddTab({
-        Title = "Second Sea",
-        Icon = ""
-    }),
-    FindThird = Window:AddTab({
-        Title = "Third Sea",
-        Icon = ""
-    }),
-
-    FullMirage = Window:AddTab({
-        Title = "Full Moon",
-        Icon = ""
-    }),
-    V4Race = Window:AddTab({
-        Title = "Race",
-        Icon = ""
-    }),
-    SeaEvent = Window:AddTab({
-        Title = "Sea Event",
-        Icon = ""
-    }),
-
-    Players = Window:AddTab({
-        Title = "Players",
-        Icon = ""
-    }),
-    Visuals = Window:AddTab({
-        Title = "Visuals",
-        Icon = ""
-    }),
-    Shop = Window:AddTab({
-        Title = "Shop",
-        Icon = ""
-    }),
-
-    Misc = Window:AddTab({
-        Title = "Misc",
-        Icon = ""
-    }),
-
-    Settings = Window:AddTab({
-        Title = "Settings",
-        Icon = "settings"
-    })
-}
 local id = game.PlaceId
 if id == 2753915549 then
     World1 = true;
@@ -1148,6 +1077,78 @@ end
 
 local Notification = loadstring(game:HttpGet(
     "https://raw.githubusercontent.com/Jxereas/UI-Libraries/main/notification_gui_library.lua", true))()
+
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "Luxury Hub | Premium",
+    SubTitle = "by xZc",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Light",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+local Tabs = {
+    Main = Window:AddTab({
+        Title = "Main",
+        Icon = ""
+    }),
+    Stats = Window:AddTab({
+        Title = "Stats",
+        Icon = ""
+    }),
+
+    FindFirst = Window:AddTab({
+        Title = "First Sea",
+        Icon = ""
+    }),
+    FindSec = Window:AddTab({
+        Title = "Second Sea",
+        Icon = ""
+    }),
+    FindThird = Window:AddTab({
+        Title = "Third Sea",
+        Icon = ""
+    }),
+
+    FullMirage = Window:AddTab({
+        Title = "Full Moon",
+        Icon = ""
+    }),
+    V4Race = Window:AddTab({
+        Title = "Race",
+        Icon = ""
+    }),
+    SeaEvent = Window:AddTab({
+        Title = "Sea Event",
+        Icon = ""
+    }),
+
+    Players = Window:AddTab({
+        Title = "Players",
+        Icon = ""
+    }),
+    Visuals = Window:AddTab({
+        Title = "Visuals",
+        Icon = ""
+    }),
+    Shop = Window:AddTab({
+        Title = "Shop",
+        Icon = ""
+    }),
+
+    Misc = Window:AddTab({
+        Title = "Misc",
+        Icon = ""
+    }),
+
+    Settings = Window:AddTab({
+        Title = "Settings",
+        Icon = "settings"
+    })
+}
 
 Tabs.Main:AddParagraph({
     Title = "Main",
