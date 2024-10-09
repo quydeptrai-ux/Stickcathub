@@ -19,7 +19,77 @@ local myWait = function(n)
     end
 end
 fask.wait = myWait
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
+local Window = Luxury:CreateWindow({
+    Title = "Luxury Hub | Premium",
+    SubTitle = "by xZc",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Light",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+local Tabs = {
+    Main = Window:AddTab({
+        Title = "Main",
+        Icon = ""
+    }),
+    Stats = Window:AddTab({
+        Title = "Stats",
+        Icon = ""
+    }),
+
+    FindFirst = Window:AddTab({
+        Title = "First Sea",
+        Icon = ""
+    }),
+    FindSec = Window:AddTab({
+        Title = "Second Sea",
+        Icon = ""
+    }),
+    FindThird = Window:AddTab({
+        Title = "Third Sea",
+        Icon = ""
+    }),
+
+    FullMirage = Window:AddTab({
+        Title = "Full Moon",
+        Icon = ""
+    }),
+    V4Race = Window:AddTab({
+        Title = "Race",
+        Icon = ""
+    }),
+    SeaEvent = Window:AddTab({
+        Title = "Sea Event",
+        Icon = ""
+    }),
+
+    Players = Window:AddTab({
+        Title = "Players",
+        Icon = ""
+    }),
+    Visuals = Window:AddTab({
+        Title = "Visuals",
+        Icon = ""
+    }),
+    Shop = Window:AddTab({
+        Title = "Shop",
+        Icon = ""
+    }),
+
+    Misc = Window:AddTab({
+        Title = "Misc",
+        Icon = ""
+    }),
+
+    Settings = Window:AddTab({
+        Title = "Settings",
+        Icon = "settings"
+    })
+}
 local id = game.PlaceId
 if id == 2753915549 then
     World1 = true;
@@ -1078,85 +1148,6 @@ end
 
 local Notification = loadstring(game:HttpGet(
     "https://raw.githubusercontent.com/Jxereas/UI-Libraries/main/notification_gui_library.lua", true))()
-
-local Luxury = loadstring(game:HttpGet(
-    "https://raw.githubusercontent.com/NguyenLam2504/pearcathub.lua/main/FluentAhihi.lua"))()
-local SaveManager = loadstring(game:HttpGet(
-    "https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet(
-    "https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
-
-local Window = Luxury:CreateWindow({
-    Title = "Luxury Hub | Premium",
-    SubTitle = "by xZc",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Light",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
-})
-
-local Tabs = {
-    Main = Window:AddTab({
-        Title = "Main",
-        Icon = ""
-    }),
-    Stats = Window:AddTab({
-        Title = "Stats",
-        Icon = ""
-    }),
-
-    FindFirst = Window:AddTab({
-        Title = "First Sea",
-        Icon = ""
-    }),
-    FindSec = Window:AddTab({
-        Title = "Second Sea",
-        Icon = ""
-    }),
-    FindThird = Window:AddTab({
-        Title = "Third Sea",
-        Icon = ""
-    }),
-
-    FullMirage = Window:AddTab({
-        Title = "Full Moon",
-        Icon = ""
-    }),
-    V4Race = Window:AddTab({
-        Title = "Race",
-        Icon = ""
-    }),
-    SeaEvent = Window:AddTab({
-        Title = "Sea Event",
-        Icon = ""
-    }),
-
-    Players = Window:AddTab({
-        Title = "Players",
-        Icon = ""
-    }),
-    Visuals = Window:AddTab({
-        Title = "Visuals",
-        Icon = ""
-    }),
-    Shop = Window:AddTab({
-        Title = "Shop",
-        Icon = ""
-    }),
-
-    Misc = Window:AddTab({
-        Title = "Misc",
-        Icon = ""
-    }),
-
-    Settings = Window:AddTab({
-        Title = "Settings",
-        Icon = "settings"
-    })
-}
-
-local Settings = Luxury.Options
 
 Tabs.Main:AddParagraph({
     Title = "Main",
@@ -12488,524 +12479,7 @@ Tabs.SeaEvent:AddParagraph({
     Content = "Auto Shark ,Leviathan, Sea Beast and more!"
 })
 
-local SeaLevel = Tabs.SeaEvent:AddDropdown("SelectSeaLvl", {
-    Title = "Selected Sea Level",
-    Values = {"1", "2", "3", "4", "5", "6"},
-    Multi = false,
-    Default = 6
-})
 
-SeaLevel:OnChanged(function(starts)
-    SelectSeaLvl = tonumber(starts)
-end)
-
-local GetRough = Tabs.SeaEvent:AddToggle("Auto_Rough_Sea", {
-    Title = "Auto Rough Sea",
-    Default = AutoOutSea
-})
-
-GetRough:OnChanged(function(starts)
-    AutoOutSea = starts
-    if starts then
-        mobilefly(speaker, true)
-    end
-    fask.spawn(function()
-        local Unpart = {}
-        while fask.wait() do
-            if AutoOutSea then
-                local itmyboat = myboat()
-                if itmyboat and itmyboat.Parent then
-                    for _, v in pairs(itmyboat.Parent:GetDescendants()) do
-                        if v:IsA("BasePart") then
-                            if v.CanCollide ~= false then
-                                v.CanCollide = false
-                                Unpart[#Unpart + 1] = v
-                            end
-                        end
-                    end
-                    for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                        if v:IsA("BasePart") then
-                            if v.CanCollide ~= false then
-                                v.CanCollide = false
-                                Unpart[#Unpart + 1] = v
-                            end
-                        end
-                    end
-
-                    local Hum = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
-                    local TarCFrame = Vector3.new(-22859.4453125, 81.92976379394531, 33646.625)
-                    local Current = game.Workspace.CurrentCamera
-                    Current.CFrame = CFrame.new(Current.CFrame.p, TarCFrame)
-                    if (Hum and Hum.Sit == true) then
-                        print(FLYING)
-                        if not FLYING then
-                            mobilefly(speaker, true)
-                            fask.wait(0.5)
-                        else
-                            local Current = game.Workspace.CurrentCamera
-                            Current.CFrame = CFrame.new(Current.CFrame.p, TarCFrame)
-
-                            if SelectSeaLvl <
-                                tonumber(
-                                    game.Players.LocalPlayer.PlayerGui.Main.Compass.Frame.DangerLevel.TextLabel.Text) then
-                                game:service('VirtualInputManager'):SendKeyEvent(true, "W", false, game)
-
-                            else
-
-                                game:service('VirtualInputManager'):SendKeyEvent(false, "W", false, game)
-                            end
-                        end
-
-                    elseif Hum then
-
-                        itmyboat:Sit(Hum)
-                        fask.wait(0.5)
-                    end
-                end
-            else
-                for i, v in pairs(Unpart) do
-                    if v ~= nil then
-                        v.CanCollide = true
-                    end
-
-                end
-                unmobilefly(speaker)
-                break
-            end
-        end
-    end)
-end)
-
--- local Refresh_Shark = Page7:Label("Shark Spawn : 🔴")
-
--- fask.spawn(function()
---     while wait() do 
---         pcall(function()
---             if World3 and game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark [Lv. 2000] [Raid Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark [Lv. 2000] [Raid Boss]") then
---                 Refresh_Shark:Set("Shark Spawn : 🟢")
---             else
---                 Refresh_Shark:Set("Shark Spawn : 🔴")
---             end
---         end)
---     end
--- end)
-
-local TerrorsharkFarm = Tabs.SeaEvent:AddToggle("Terrorshark", {
-    Title = "Auto Terrorshark",
-    Default = Terrorshark
-})
-Tabs.SeaEvent:AddToggle("TerrorsharkHop", {
-    Title = "Auto Terrorshark [HOP]",
-    Default = TerrorsharkHop
-}):OnChanged(function(starts)
-    TerrorsharkHop = starts
-end)
-Tabs.SeaEvent:AddToggle("Auto_Boat", {
-    Title = "Auto Boat",
-    Default = true
-}):OnChanged(function(starts)
-    Auto_Boat = starts
-end)
-Tabs.SeaEvent:AddToggle("Auto_Shark", {
-    Title = "Auto Shark",
-    Default = true
-}):OnChanged(function(starts)
-    Auto_Shark = starts
-end)
-local Kill_Leviathan = Tabs.SeaEvent:AddToggle("Auto_Kill_Leviathan", {
-    Title = "Auto Kill Leviathan",
-    Default = Auto_Kill_Leviathan
-})
-local Frozen_Dimension = Tabs.SeaEvent:AddToggle("Auto_Frozen_Dimension", {
-    Title = "Auto Frozen Dimension",
-    Default = Auto_Frozen_Dimension
-})
-
-TerrorsharkFarm:OnChanged(function(starts)
-    Terrorshark = starts
-    fask.spawn(function()
-        while Terrorshark do
-            game:GetService("RunService").Stepped:Wait()
-            local itmyboat = myboat()
-            for _, v in pairs(itmyboat.Parent:GetDescendants()) do
-                if v:IsA("BasePart") then
-                    v.CanCollide = false
-                end
-            end
-            for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                if v:IsA("BasePart") then
-                    v.CanCollide = false
-                end
-            end
-        end
-    end)
-    spawn(function()
-        while Terrorshark do
-            fask.wait()
-            if Terrorshark then
-                xpcall(function()
-                    DieWait()
-                    local itmyboat = myboat()
-                    if itmyboat and itmyboat.Parent.Humanoid.Value <= 0 then
-                        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
-                    end
-                    if havemob("Terrorshark [Lv. 2000] [Raid Boss]") and
-                        havemob("Terrorshark [Lv. 2000] [Raid Boss]").Humanoid.Health > 0 then
-                        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
-                        game:service('VirtualInputManager'):SendKeyEvent(false, "W", false, game)
-                        game:service('VirtualInputManager'):SendKeyEvent(false, "D", false, game)
-                        fask.wait(0.5)
-                        NoClip = true
-                        local v = havemob("Terrorshark [Lv. 2000] [Raid Boss]")
-                        if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                            repeat
-                                fask.wait()
-                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position -
-                                    v.HumanoidRootPart.Position).Magnitude > 150 then
-                                    totar = toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 60, 1))
-                                else
-                                    if totar then
-                                        totar:Stop()
-                                    end
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart
-                                                                                                     .CFrame *
-                                                                                                     CFrame.new(0, 60, 1)
-                                    NeedAttacking = true
-                                    if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
-                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-                                    end
-                                    if game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui") and
-                                        game.Players.LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
-                                    else
-                                        fask.wait()
-                                        game:service('VirtualUser'):CaptureController()
-                                        game:service('VirtualUser'):SetKeyDown('0x65')
-                                        fask.wait()
-                                        game:service('VirtualUser'):SetKeyUp('0x65')
-                                    end
-                                    if not game.Players.LocalPlayer.Character:FindFirstChild(Selected_Weapons) then
-                                        wait()
-                                        EquipWeapon(Selected_Weapons)
-                                    end
-                                end
-                            until not v.Parent or not Terrorshark or v.Humanoid.Health <= 0
-                            NeedAttacking = false
-                            NoClip = false
-                        end
-                    elseif Auto_Shark and CustomFindFirstChild({"Shark [Lv. 2000]", "Piranha [Lv. 2000]"}) then
-                        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
-                        NoClip = true
-                        for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                            if Auto_Shark and v:IsA("Model") and
-                                table.find({"Shark [Lv. 2000]", "Piranha [Lv. 2000]"}, v.Name) and
-                                v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and
-                                v.Humanoid.Health > 0 then
-                                repeat
-                                    fask.wait()
-                                    if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and
-                                        (v.HumanoidRootPart.Position -
-                                            game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude >
-                                        150 then
-                                        Farmtween = toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 60, 1))
-                                    elseif v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and
-                                        (v.HumanoidRootPart.Position -
-                                            game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
-                                        150 then
-                                        if Farmtween then
-                                            Farmtween:Stop()
-                                        end
-                                        if not game.Players.LocalPlayer.Character:FindFirstChild(Selected_Weapons) then
-                                            wait()
-                                            EquipWeapon(Selected_Weapons)
-                                        end
-                                        NeedAttacking = true
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart
-                                                                                                         .CFrame *
-                                                                                                         CFrame.new(0,
-                                                60, 1)
-                                    end
-                                until not Auto_Shark or not v.Parent or v.Humanoid.Health <= 0
-                                NeedAttacking = false
-                            end
-                        end
-
-                        NoClip = false
-                    elseif Auto_Boat and CheckPirateBoat() then
-                        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
-                        NoClip = true
-                        for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                            if Auto_Boat and v:FindFirstChildOfClass("VehicleSeat") and v.Health.Value > 0 then
-                                repeat
-                                    fask.wait()
-                                    local PirateBoatCFrame = v:FindFirstChildOfClass("VehicleSeat").CFrame
-                                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position -
-                                        (Vector3.new(PirateBoatCFrame.X, 30, PirateBoatCFrame.Z))).magnitude > 150 then
-                                        Farmtween =
-                                            toTargetNoDie(CFrame.new(PirateBoatCFrame.X, 30, PirateBoatCFrame.Z))
-                                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position -
-                                        (Vector3.new(PirateBoatCFrame.X, 30, PirateBoatCFrame.Z))).magnitude <= 150 then
-                                        if Farmtween then
-                                            Farmtween:Stop()
-                                        end
-                                        fask.spawn(function()
-
-                                            if not LoppSeaDup then
-
-                                                LoppSeaDup = true
-                                                for i, v in ipairs({"Melee", "Blox Fruit", "Gun", "Sword"}) do
-                                                    EquipWeapon(GetFightingStyle(v))
-                                                    fask.wait(0.2)
-                                                    if SkillZ then
-                                                        game:service('VirtualInputManager'):SendKeyEvent(true, "Z",
-                                                            false, game)
-                                                        fask.wait(0.5)
-                                                        game:service('VirtualInputManager'):SendKeyEvent(false, "Z",
-                                                            false, game)
-                                                    end
-                                                    if SkillX then
-                                                        game:service('VirtualInputManager'):SendKeyEvent(true, "X",
-                                                            false, game)
-                                                        fask.wait(0.5)
-                                                        game:service('VirtualInputManager'):SendKeyEvent(false, "X",
-                                                            false, game)
-                                                    end
-                                                    if SkillC then
-                                                        game:service('VirtualInputManager'):SendKeyEvent(true, "C",
-                                                            false, game)
-                                                        fask.wait(0.5)
-                                                        game:service('VirtualInputManager'):SendKeyEvent(false, "C",
-                                                            false, game)
-                                                    end
-                                                    if SkillV then
-                                                        game:service('VirtualInputManager'):SendKeyEvent(true, "V",
-                                                            false, game)
-                                                        fask.wait(0.5)
-                                                        game:service('VirtualInputManager'):SendKeyEvent(false, "V",
-                                                            false, game)
-                                                    end
-                                                    if SkillF then
-                                                        game:service('VirtualInputManager'):SendKeyEvent(true, "F",
-                                                            false, game)
-                                                        fask.wait(0.5)
-                                                        game:service('VirtualInputManager'):SendKeyEvent(false, "F",
-                                                            false, game)
-                                                    end
-                                                    fask.wait(0.5)
-                                                end
-                                                LoppSeaDup = false
-                                            end
-                                        end)
-                                        PosKillSea = PirateBoatCFrame.Position
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = PirateBoatCFrame *
-                                                                                                         CFrame.new(0,
-                                                10, 1)
-                                        SpamSkillSea = true
-                                    end
-                                until not Auto_Boat or not v.Parent or not v:FindFirstChildOfClass("VehicleSeat") or
-                                    v.Health.Value == 0
-                                SpamSkillSea = false
-                            end
-                        end
-
-                    elseif (game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") and
-                        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == true) then
-                        NoClip = false
-                        NeedAttacking = false
-                        game:service('VirtualInputManager'):SendKeyEvent(true, "W", false, game)
-                        game:service('VirtualInputManager'):SendKeyEvent(true, "D", false, game)
-
-                    elseif itmyboat and (game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") and
-                        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false) and
-                        (game.Players.LocalPlayer.Character.HumanoidRootPart.Position -
-                            Vector3.new(-22859.4453125, 41.92976379394531, 33646.625)).Magnitude > 60 then
-                        NoClip = true
-                        TweenToSea = toTarget(CFrame.new(-22859.4453125, 41.92976379394531, 33646.625))
-                        TweenToSea:Wait()
-                        fask.wait(2)
-                        NoClip = false
-                    elseif itmyboat and (game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") and
-                        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false) then
-                        NoClip = false
-                        print("??")
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-22859.4453125,
-                            41.92976379394531, 33646.625) * CFrame.new(0, 30, 0)
-                        fask.wait(0.1)
-                        itmyboat:Sit(game.Players.LocalPlayer.Character:WaitForChild("Humanoid"))
-                        fask.wait(1)
-
-                    elseif not itmyboat then
-                        NoClip = true
-                        TweenToSea = toTarget(CFrame.new(-16221.619140625, 9.0863618850708, 432.0790100097656))
-                        TweenToSea:Wait()
-                        _F("BuyBoat", "PirateGrandBrigade")
-                        fask.wait(0.5)
-                        NoClip = false
-                    end
-                end, print)
-            end
-        end
-    end)
-end)
-
-fask.spawn(function()
-    while fask.wait() do
-        if TerrorsharkHop then
-            if havemob("Terrorshark [Lv. 2000] [Raid Boss]") and
-                havemob("Terrorshark [Lv. 2000] [Raid Boss]").Humanoid.Health > 0 then
-                game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
-                fask.wait(0.5)
-                NoClip = true
-                local v = havemob("Terrorshark [Lv. 2000] [Raid Boss]")
-                if not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 then
-                    return
-                end
-                repeat
-                    fask.wait()
-                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude >
-                        150 then
-                        totar = toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 60, 1))
-                    else
-                        if totar then
-                            totar:Stop()
-                        end
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame *
-                                                                                         CFrame.new(0, 60, 1)
-                        NeedAttacking = true
-                        if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-                        end
-                        if game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui") and
-                            game.Players.LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
-                        else
-                            fask.wait()
-                            game:service('VirtualUser'):CaptureController()
-                            game:service('VirtualUser'):SetKeyDown('0x65')
-                            fask.wait()
-                            game:service('VirtualUser'):SetKeyUp('0x65')
-                        end
-                        if not game.Players.LocalPlayer.Character:FindFirstChild(Selected_Weapons) then
-                            wait()
-                            EquipWeapon(Selected_Weapons)
-                        end
-                    end
-                until not v.Parent or not Terrorshark or v.Humanoid.Health <= 0 or not v.Parent
-                NeedAttacking = false
-                NoClip = false
-            else
-                ServerFunc:TeleportFast()
-            end
-        end
-    end
-end)
-
-Kill_Leviathan:OnChanged(function(value)
-    Auto_Kill_Leviathan = value
-    if value == false then
-        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-    end
-    Save()
-    fask.spawn(function()
-        while Auto_Kill_Leviathan do
-            fask.wait()
-            local wasdmob
-            for i, v in pairs(game.Workspace.SeaBeasts:GetChildren()) do
-                if Auto_Kill_Leviathan and
-                    (IsSameName(v.Name, "Leviathan [Raid Boss]") or IsSameName(v.Name, "Leviathan")) and
-                    v:FindFirstChild("HumanoidRootPart") and v.Health.Value > 0 then
-                    wasdmob = v
-                    break
-                end
-            end
-            if wasdmob then
-                NoClip = true
-                repeat
-                    fask.wait()
-                    local SeaBeastFrame = wasdmob:FindFirstChild("HumanoidRootPart").CFrame
-                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position -
-                        (Vector3.new(SeaBeastFrame.X, 30, SeaBeastFrame.Z))).magnitude > 150 then
-                        Farmtween = toTarget(CFrame.new(SeaBeastFrame.X, 30, SeaBeastFrame.Z))
-                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position -
-                        (Vector3.new(SeaBeastFrame.X, 30, SeaBeastFrame.Z))).magnitude <= 150 then
-                        if Farmtween then
-                            Farmtween:Stop()
-                        end
-                        if TypeSeabeast == 0 then
-                            PosKillSea = Vector3.new(SeaBeastFrame.X, 80, SeaBeastFrame.Z)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-                                CFrame.new(SeaBeastFrame.X, 30, SeaBeastFrame.Z)
-                        else
-                            PosKillSea = Vector3.new(SeaBeastFrame.X, 60, SeaBeastFrame.Z)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-                                CFrame.new(SeaBeastFrame.X, 70, SeaBeastFrame.Z)
-                        end
-                        fask.spawn(function()
-                            if not LoppSeaDup then
-                                LoppSeaDup = true
-                                for i, v in ipairs({"Melee", "Blox Fruit", "Sword"}) do
-                                    EquipWeapon(GetFightingStyle(v))
-                                    fask.wait(0.2)
-                                    if Skill_Z then
-                                        game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
-                                        fask.wait(0.5)
-                                        game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
-                                    end
-                                    if Skill_X then
-                                        game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
-                                        fask.wait(0.5)
-                                        game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
-                                    end
-                                    if Skill_C then
-                                        game:service('VirtualInputManager'):SendKeyEvent(true, "C", false, game)
-                                        fask.wait(0.5)
-                                        game:service('VirtualInputManager'):SendKeyEvent(false, "C", false, game)
-                                    end
-                                    if Skill_V then
-                                        game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
-                                        fask.wait(0.5)
-                                        game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
-                                    end
-                                    fask.wait(0.5)
-                                end
-                                LoppSeaDup = false
-                            end
-                        end)
-                        SpamSkillSea = true
-                    end
-                until not Auto_Kill_Leviathan or not wasdmob.Parent or not wasdmob:FindFirstChild("HumanoidRootPart") or
-                    wasdmob.Health.Value == 0
-                SpamSkillSea = false
-            end
-            NoClip = false
-        end
-    end)
-end)
-
-Frozen_Dimension:OnChanged(function(starts)
-    Auto_Frozen_Dimension = starts
-    if starts == false then
-        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-    end
-    Save()
-    fask.spawn(function()
-        while Auto_Frozen_Dimension do
-            fask.wait()
-            for i, v in ipairs(game:GetService("Workspace")._WorldOrigin.Locations:GetChildren()) do
-                if Auto_Frozen_Dimension and IsSameName(v.Name, "Frozen Dimension") then
-                    repeat
-                        fask.wait()
-                        NoClip = true
-                        wasdtween = toTarget(v.CFrame * CFrame.new(1, 50, 0))
-                    until not v.Parent or not Auto_Frozen_Dimension
-                    NoClip = false
-                    if wasdtween then
-                        wasdtween:Stop()
-                    end
-                end
-            end
-        end
-        NoClip = false
-    end)
-end)
 
 Tabs.Visuals:AddParagraph({
     Title = "World - Teleport",
